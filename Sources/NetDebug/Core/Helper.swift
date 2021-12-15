@@ -298,9 +298,13 @@ class DebugInfo {
     session.dataTask(
       with: req as URLRequest,
       completionHandler: { (data, response, error) in
+        guard let data = data else {
+          completion("-")
+          return
+        }
         do {
           let rawJsonData = try JSONSerialization.jsonObject(
-            with: data!, options: [.allowFragments])
+            with: data, options: [.allowFragments])
           if let ipAddress = (rawJsonData as AnyObject).value(forKey: "ip") {
             completion(ipAddress as! String)
           } else {

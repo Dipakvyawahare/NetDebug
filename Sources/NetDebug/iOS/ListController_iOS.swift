@@ -28,11 +28,11 @@
       tableView.register(
         ListCell.self, forCellReuseIdentifier: NSStringFromClass(ListCell.self))
 
-      navigationItem.leftBarButtonItem = UIBarButtonItem(
+      navigationItem.rightBarButtonItem = UIBarButtonItem(
         image: UIImage.Close(), style: .plain, target: self,
         action: #selector(ListController_iOS.closeButtonPressed))
 
-      let rightButtons = [
+      let leftButtons = [
         UIBarButtonItem(
           barButtonSystemItem: .trash, target: self,
           action: #selector(ListController_iOS.trashButtonPressed)),
@@ -41,7 +41,7 @@
           action: #selector(ListController_iOS.settingsButtonPressed)),
       ]
 
-      self.navigationItem.rightBarButtonItems = rightButtons
+      self.navigationItem.leftBarButtonItems = leftButtons
 
       searchController = UISearchController(searchResultsController: nil)
       searchController.searchResultsUpdater = self
@@ -82,6 +82,7 @@
         selector: #selector(ListController_iOS.deactivateSearchController),
         name: NSNotification.Name.DeactivateSearch,
         object: nil)
+      navigationController?.navigationBar.backgroundColor = .white
     }
 
     override func viewWillAppear(_ animated: Bool) {
